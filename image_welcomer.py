@@ -1,7 +1,10 @@
 token = "your-token-here" # <- Your Bot Token found on Discord's Application Website (https://discord.com/developers/applications)
 prefix = "&" # <- Bot Prefix. Doesn't matter because we don't use any Commands here
 
-import discord # All these Packages have to be installed on your Pc for the Bot to work. (Usually: 'pip install ...' in your CMD when using Windows 10. If not, look it up)
+
+# All these Packages have to be installed on your Pc for the Bot to work. (Usually: 'pip install ...' in your CMD when using Windows 10. If not, look it up)
+
+import discord
 from discord.ext import commands
 from PIL import Image, ImageChops, ImageDraw, ImageFont
 from io import BytesIO
@@ -20,7 +23,10 @@ print("Loading..")
 async def on_ready():
     print("Bot Ready!")
 
-def circle(pfp,size = (215,215)): # Code to round the Image (Profilepicture)
+    
+# Code to round the Image (Profilepicture)
+
+def circle(pfp,size = (215,215)): 
     
     pfp = pfp.resize(size, Image.ANTIALIAS).convert("RGBA")
     
