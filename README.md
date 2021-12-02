@@ -14,7 +14,7 @@ Your code is 100% secure and won't be published anywhere. Also my Server has a g
 Don't mind sending me a friend request! I will try to answer all of your questions and problems.
 
 Contact:
-Discord: Bero#6666
+Discord: bero#6666
 Telegram: @Bero_06
 
 Have Fun! :)
