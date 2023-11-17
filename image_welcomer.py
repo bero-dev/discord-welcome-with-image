@@ -17,15 +17,17 @@ bot.remove_command("help") # Removes the default 'help' Command from Discord
 
 print("Loading..")
 
-guild = bot.get_guild(999999999999999) # <- Your Server (Guild) ID (Right-Click on Server Icon -> Copy ID)
-text = guild.get_channel(999999999999999) # <- Your Welcome-Channel ID (Right-Click on Text-Channel -> Copy ID)
-filename = "your-file.png" # <- The name of the file that will be saved and deleted after (Should be PNG)
-background = Image.open("welcome_example_background.png") # <- Background Image (Should be PNG)
-font = ImageFont.truetype("LemonMilkMedium-mLZYV.otf",42) # <- Text Font of the Member Count. Change the text size for your preference
 
 
 @bot.event
 async def on_ready():
+    
+    bot.guild = bot.get_guild(999999999999999) # <- Your Server (Guild) ID (Right-Click on Server Icon -> Copy ID)
+    bot.text = bot.guild.get_channel(999999999999999) # <- Your Welcome-Channel ID (Right-Click on Text-Channel -> Copy ID)
+    bot.filename = "your-file.png" # <- The name of the file that will be saved and deleted after (Should be PNG)
+    bot.background = Image.open("welcome_example_background.png") # <- Background Image (Should be PNG)
+    bot.font = ImageFont.truetype("LemonMilkMedium-mLZYV.otf",42) # <- Text Font of the Member Count. Change the text size for your preference
+    
     print("Bot Ready!")
 
 
@@ -55,19 +57,19 @@ async def on_member_join(member):
     pfp = circle(pfp)
     pfp = pfp.resize((265,265)) # Resizes the Profilepicture so it fits perfectly in the circle
 
-    draw = ImageDraw.Draw(background)
-    member_text = ("#" + str(guild.member_count) + "  USER") # <- Text under the Profilepicture with the Membercount
-    draw.text((383,410),member_text,font=font)
+    draw = ImageDraw.Draw(bot.background)
+    member_text = ("#" + str(bot.guild.member_count) + "  USER") # <- Text under the Profilepicture with the Membercount
+    draw.text((383,410),member_text,font=bot.font)
 
-    background.paste(pfp, (379,123), pfp) # Pastes the Profilepicture on the Background Image
-    background.save(filename) # Saves the finished Image in the folder with the filename
+    bot.background.paste(pfp, (379,123), pfp) # Pastes the Profilepicture on the Background Image
+    bot.background.save(bot.filename) # Saves the finished Image in the folder with the filename
 
-    await text.send(file = discord.File(filename),content ="WELCOME " + member.mention + "! Please read the rules! :heart:") # <- The welcome Message Content put above the Image. "member.mention" @mentions the user
+    await bot.text.send(file = discord.File(bot.filename),content ="WELCOME " + member.mention + "! Please read the rules! :heart:") # <- The welcome Message Content put above the Image. "member.mention" @mentions the user
     
     await asyncio.sleep(5) # 5 Seconds of waiting time
     
     try: 
-        os.remove('C:/path/' + filename) # <- Change your path to where the Bot is located. Tries to delete the file again so your folder won't be full of Images. If it's already deleted nothing will happen
+        os.remove('C:/path/' + bot.filename) # <- Change your path to where the Bot is located. Tries to delete the file again so your folder won't be full of Images. If it's already deleted nothing will happen
     except:
         pass
 
