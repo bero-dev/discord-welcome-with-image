@@ -50,7 +50,7 @@ def circle(pfp,size = (215,215)):
 
 @bot.event
 async def on_member_join(member):
-    asset = member.avatar # This loads the Member Avatar
+    asset = member.display_avatar # This loads the Member Avatar
     data = BytesIO(await asset.read())
 
     pfp = Image.open(data).convert("RGBA")
